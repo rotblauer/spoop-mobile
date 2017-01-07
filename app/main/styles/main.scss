@@ -1,0 +1,164 @@
+/*
+To customize the look and feel of Ionic, you can override the variables
+in ionic's _variables.scss file.
+
+For example, you might change some of the default colors:
+*/
+
+$light:                           #fff !default;
+$stable:                          #f8f8f8 !default;
+$positive:                        #4a87ee !default;
+$calm:                            #43cee6 !default;
+$balanced:                        #669d45 !default;
+$energized:                       #f0b840 !default;
+$assertive:                       #ef4e3a !default;
+$royal:                           #8a6de9 !default;
+$dark:                            #444 !default;
+
+$poop-color: lighten(#804000, 5%);
+
+// The path for our ionicons font files, relative to the built & temporary main.css
+$ionicons-font-path: "../assets/fonts" !default;
+
+
+// Include all of Ionic
+@import "../../bower_components/ionic/scss/ionic";
+@import './calendar';
+@import './daily';
+@import './stats';
+
+
+
+.item-no-border {
+  border: none !important;
+}
+
+#cal-heatmap {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cal-heatmap-container {
+  margin-top: 20px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 35px;
+}
+
+// ion-view {
+//   maring-top: 20px;
+// }
+
+ion-content.recap {
+  margin-top: 30px !important;
+}
+
+ion-item {
+  border: none !important;
+}
+
+.tabs {background-size: 100% 0px !important;}
+
+.item-divider-minimal {
+
+}
+
+.item-complex .item-content {
+  padding: 10px 49px 6px 16px;
+}
+
+.bar {
+  border: none !important;
+  background-size: 100% 0px;
+}
+
+sup.super-small {
+    font-size: .4em;
+    // line-height: 2em;
+    vertical-align: super;
+    line-weight: lighter;
+  }
+
+textarea {
+  resize: none;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+@mixin labeler {
+    padding: 2px 3px 2px 3px;
+    border-radius: 4px;
+}
+
+.type {
+  // rabbit poop
+  &.type-mocha1 {
+    background-color: darken($poop-color, 18%);
+  }
+  &.type-mocha2 {
+    background-color: darken($poop-color, 12%);
+  }
+  &.type-mocha3 {
+    background-color: darken($poop-color, 6%);
+  }
+  &.type-mocha4 {
+    background-color: $poop-color;
+  }
+  &.type-mocha5 {
+    background-color: lighten($poop-color, 10%);
+  }
+  &.type-mocha6 {
+    background-color: lighten($poop-color, 20%);
+  }
+  // soft, soupy poop
+  &.type-mocha7 {
+    background-color: lighten($poop-color, 30%);
+  }
+
+  &.type-muted {
+    color: lighten($dark, 10%);
+  }
+
+  &.type-assertive {
+    color: $assertive;
+    &.labelize {
+      color: $stable;
+      background-color: $assertive;
+      @include labeler();
+    }
+  }
+  &.type-balanced {
+    color: $balanced;
+    &.labelize {
+      color: $stable;
+      background-color: $balanced;
+      @include labeler();
+    }
+  }
+  &.type-energized {
+    color: $energized;
+    &.labelize {
+      color: $stable;
+      background-color: $energized;
+      @include labeler();
+    }
+  }
+  &.type-stable {
+    color: darken($stable, 30%);
+  }
+  &.type-positive {
+    color: $positive;
+  }
+
+  &.type-poo {
+    color: $poop-color;
+  }
+
+
+}
+
+textarea {
+  padding-top: 1rem;
+  font-size: $font-size-large;
+  line-height: $line-height-large;
+}

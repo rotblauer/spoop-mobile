@@ -1,0 +1,64 @@
+<ion-view view-title="Calendar" hide-nav-bar='true'>
+
+  <div class="bar bar-header bar-light bar-no-border ">
+    <button class="button icon ion-ios-arrow-down button-small button-clear button-balanced" ng-click="nex()"></button>
+
+    <div class="h1 title" ng-if="data.clicked && data.clicked.val" style="color: #9cc069;">
+      {{ data.clicked.val }} donation<span ng-if="data.clicked.val > 1">s</span>  on {{ data.clicked.date | date: "d MMM" }}
+    </div>
+
+    <button class="button icon ion-ios-arrow-up button-small button-clear button-balanced" ng-click="prev()"></button>
+   </div>
+
+  <ion-content class="padding recap">
+    <ion-refresher
+      pulling-text="Pull to refresh..."
+      on-refresh="doRefresh()">
+    </ion-refresher>
+
+    <div class="padding text-center type type-muted" style="margin-top: 30px;"  ng-if="data.poops.length < 1">
+      Loading...
+    </div>
+
+    <cal-heatmap config="data.heaterOptions"></cal-heatmap>
+
+
+    <div class="row">
+      <div class="col text-right">
+        <button class="button button-small button-balanced button-clear icon ion-ios-cog-outline" ui-sref='debug'>
+          <!-- <i class="icon ion-ios-cog-outline"></i> -->
+        </button>
+      </div>
+    </div>
+
+    <ion-list ng-if="data.poops" ng-repeat="(key, value) in data.poops | groupBy:'date_of_passage'">
+
+      <div class="item item-divider item-no-border item-divider-minimal" style="margin-bottom: 10px;">
+        <p> {{ key | date:"EEEE, d MMM":"+0000"}}</p>
+      </div>
+
+      <ion-item
+        ng-repeat="poop in value | orderBy:'time_of_passage'"
+        class="item-remove-animate item-text-wrap"
+        style="padding-bottom: 5px;"
+        ui-sref="main.listDetail({poopId: poop.id})">
+
+        <!-- <i class="icon ion-ios-circle-outline" style="color: white; background-color: black;"></i> -->
+
+        <div class='type type-mocha{{poop.bristol_score}}' style="height: 5px; border-radius: 2px; width: {{ (poop.weight / 200) * 100 }}%; margin-bottom: 10px; margin-top: -5px;"></div>
+
+        <p>
+          <span class="" ng-class="{'type type-balanced labelize' : poop.processable, 'type type-assertive labelize' : poop.donated && !poop.processable, 'type type-energized labelize' : !poop.donated}">{{ processStatus(poop) }}</span>
+          {{ poop.time_of_passage | date: "Ha" }}
+          <span class="type type-stable">
+          (<span am-time-ago="poop.time_of_passage"></span>)</span>
+        </p>
+
+        <p ng-bind-html="highlightHashtags(poop.notes)" style="font-style: italic;"></p>
+      </ion-item>
+
+
+    </ion-list>
+
+  </ion-content>
+</ion-view>

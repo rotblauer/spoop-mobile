@@ -1,0 +1,37 @@
+@mixin vertical-align {
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.poop-gui-container {
+  height: 150px;
+  width: 100%;
+  text-align: center;
+}
+
+.poop-gui {
+  @include vertical-align();
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.weekday-container {
+  text-align: center;
+
+  .day {
+    text-align: center;
+    p {
+      @include vertical-align();
+      font-size: smaller;
+      color: white;
+    }
+    margin: 1px;
+    height: 35px;
+    background-color: green;
+  }
+}
+

@@ -1,0 +1,66 @@
+<ion-view view-title="Times" hide-nav-bar="true">
+
+  <ion-content class="padding recap" >
+
+    <p class="type type-muted">
+      Donations / days / week
+    </p>
+    <div class="weekday-container row">
+        <div class="col" style="padding: 2px;">
+          <div class="infograph-text skinny" style="background-color: {{ wdayColors[1] }};">
+            <p class="small light" style="font-size: smaller;">MON</p>
+            <h4 class="light">{{dat.unixer.weekdayly[1]}}</h4>
+          </div>
+        </div>
+        <div class="col" style="padding: 2px;">
+          <div class="infograph-text skinny" style="background-color: {{ wdayColors[2] }};">
+            <p class="small light" style="font-size: smaller;">TUE</p>
+            <h4 class="light">{{dat.unixer.weekdayly[2]}}</h4>
+          </div>
+        </div>
+        <div class="col" style="padding: 2px;">
+          <div class="infograph-text skinny" style="background-color: {{ wdayColors[3] }};">
+            <p class="small light" style="font-size: smaller;">WED</p>
+            <h4 class="light">{{dat.unixer.weekdayly[3]}}</h4>
+          </div>
+        </div>
+        <div class="col" style="padding: 2px;">
+          <div class="infograph-text skinny" style="background-color: {{ wdayColors[4] }};">
+            <p class="small light" style="font-size: smaller;">THU</p>
+            <h4 class="light">{{dat.unixer.weekdayly[4]}}</h4>
+          </div>
+        </div>
+        <div class="col" style="padding: 2px;">
+          <div class="infograph-text skinny" style="background-color: {{ wdayColors[5] }};">
+            <p class="small light" style="font-size: smaller;">FRI</p>
+            <h4 class="light">{{dat.unixer.weekdayly[5]}}</h4>
+          </div>
+        </div>
+        <div class="col" style="padding: 2px;">
+          <div class="infograph-text skinny" style="background-color: {{ wdayColors[6] }};">
+            <p class="small light" style="font-size: smaller;">SAT</p>
+            <h4 class="light">{{dat.unixer.weekdayly[6]}}</h4>
+          </div>
+        </div>
+        <div class="col" style="padding: 2px;">
+          <div class="infograph-text skinny" style="background-color: {{ wdayColors[0] }};">
+            <p class="small light" style="font-size: smaller;">SUN</p>
+            <h4 class="light">{{dat.unixer.weekdayly[0]}}</h4>
+          </div>
+        </div>
+    </div>
+
+    <p class="type type-muted">
+      Donations / hour
+    </p>
+    <div class="row" ng-repeat="hrs in hours">
+      <div class="col text-center" style="padding: 1px;" ng-repeat="hour in hrs">
+        <div class="hourly-info" style="background-color: {{ hourlyColors[hour] }}; {{colorSixHours(hour)}}"
+          >
+          <span style="font-size: .6em;" class="light" >{{ hour }}</span>
+        </div>
+      </div>
+    </div>
+
+  </ion-content>
+</ion-view>

@@ -1,0 +1,26 @@
+.type-shorty {
+  margin-bottom: -10px;
+}
+
+.infograph-text {
+  padding: 2px;
+  p {
+    margin-bottom: 2px;
+    font-weight: lighter;
+  }
+
+  h2, h3, h4 {
+    margin-top: 2px;
+  }
+  &.info-bordered {
+    border: 3px solid white;
+  }
+  &.selected {
+    border: 3px solid $balanced;
+    // border-radius: 4px;
+  }
+
+  &.skinny {
+    padding: 1px;
+  }
+}

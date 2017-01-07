@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <!-- ionic meta tags -->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <!-- custom meta tags -->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>PoopFactory</title>
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+    <!-- build:css styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/ion-datetime-picker/release/ion-datetime-picker.min.css" />
+    <link rel="stylesheet" href="bower_components/nvd3/build/nv.d3.css" />
+    <link rel="stylesheet" href="bower_components/cal-heatmap/cal-heatmap.css" />
+    <link rel="stylesheet" href="bower_components/radar-chart-d3/src/radar-chart.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+
+
+
+    <!-- build:css main/styles/app.css -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="main/styles/main.css">
+    <!-- endinject -->
+    <!-- endbuild -->
+  </head>
+  <body ng-app="PoopFactory">
+
+    <!-- the nav bar will be updated as we navigate between views -->
+    <!-- <ion-nav-bar> can be removed when using sidemenu (contained in menu.html) -->
+    <ion-nav-bar class="bar-stable">
+      <ion-nav-back-button></ion-nav-back-button>
+    </ion-nav-bar>
+    <!-- the current view will be rendered in the <ion-nav-view> directive -->
+    <ion-nav-view ></ion-nav-view>
+
+    <!-- will be a 404 during development -->
+    <script src="cordova.js"></script>
+
+    <!-- build:js scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/ionic/release/js/ionic.js"></script>
+    <script src="bower_components/ionic/release/js/ionic-angular.js"></script>
+    <script src="bower_components/ngCordova/dist/ng-cordova.js"></script>
+    <script src="bower_components/angular-dynamic-locale/src/tmhDynamicLocale.js"></script>
+    <script src="bower_components/angular-translate/angular-translate.js"></script>
+    <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+    <script src="bower_components/localforage/dist/localforage.js"></script>
+    <script src="bower_components/angular-localForage/dist/angular-localForage.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/ion-datetime-picker/release/ion-datetime-picker.min.js"></script>
+    <script src="bower_components/angular-filter/dist/angular-filter.min.js"></script>
+    <script src="bower_components/d3/d3.js"></script>
+    <script src="bower_components/nvd3/build/nv.d3.js"></script>
+    <script src="bower_components/angular-nvd3/dist/angular-nvd3.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+    <script src="bower_components/angular-moment/angular-moment.js"></script>
+    <script src="bower_components/underscore/underscore.js"></script>
+    <script src="bower_components/cal-heatmap/cal-heatmap.js"></script>
+    <script src="bower_components/simple-statistics/dist/simple_statistics.min.js"></script>
+    <script src="bower_components/radar-chart-d3/src/radar-chart.js"></script>
+    <script src="bower_components/angular-input-highlight/angular-input-highlight.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- for whatever reason calheatmap doesn't auto inject with bower. note also css. -->
+
+    <!-- <script type="text/javascript" src="bower_components/angular-cal-heatmap-directive/dist/1.3.0/calHeatmap.min.js"></script> -->
+    <!-- <script type="text/javascript" src="bower_components/angular-cal-heatmap-directive"></script> -->
+
+    <!-- build:js scripts/app.js -->
+    <!-- inject:js -->
+    <script src="main/main.js"></script>
+    <script src="main/services/tallyrally.js"></script>
+    <script src="main/services/tallyrallies.js"></script>
+    <script src="main/services/main-serv.js"></script>
+    <script src="main/services/keychain-serv.js"></script>
+    <script src="main/services/calheat-serv.js"></script>
+    <script src="main/directives/calheat.js"></script>
+    <script src="main/directives/calendar.js"></script>
+    <script src="main/controllers/times-ctrl.js"></script>
+    <script src="main/controllers/stats-ctrl.js"></script>
+    <script src="main/controllers/menu-ctrl.js"></script>
+    <script src="main/controllers/list-detail-ctrl.js"></script>
+    <script src="main/controllers/list-ctrl.js"></script>
+    <script src="main/controllers/home-ctrl.js"></script>
+    <script src="main/controllers/debug-ctrl.js"></script>
+    <script src="main/constants/config-const.js"></script>
+    <script src="app.js"></script>
+    <!-- endinject -->
+    <!-- endbuild -->
+
+
+  </body>
+</html>

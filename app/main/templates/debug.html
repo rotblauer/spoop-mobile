@@ -1,0 +1,113 @@
+<ion-view view-title="Set up">
+  <!-- do you want padding? -->
+  <ion-content class="padding">
+
+    <!-- content goes here -->
+
+
+    <button class="button button-energized button-block button-clear icon-left" ui-sref="main.list" ng-if="data.apiKey && data.apiKey.length > 1">
+     <i class="icon ion-ios-arrow-thin-left"></i>
+      Back to logs
+    </button>
+
+    <ion-list>
+
+      <ion-item class="item item-divider">
+        Connect API
+      </ion-item>
+
+      <ion-item class="item item-text-wrap">
+
+        <p class="type type-muted">
+          In order to securely connect with the Spoop API you'll need a key. If you don't have one yet, go ahead and <a href="http://www.spoop.info">get one!</a>
+        </p>
+
+        <p class="type {{data.lfresponseClass}}">
+          {{ data.lfresponse }}
+        </p>
+
+      </ion-item>
+
+       <ion-item class="item item-text-wrap item-no-border">
+         <label class="item item-input item-stacked-label">
+           <span class="input-label type type-positive" >API key</span>
+           <input type="text" ng-model="data.apiKey" >
+         </label>
+         <br>
+         <p class="type type-positive"><i class="icon ion-key"></i> Once you save an API key, you'll need to <strong>restart the application</strong> for the changes to take effect. Don't worry - you only need to do this once, ever!</p>
+
+
+         <button class="button button-block button-balanced" ng-click="setKey(data.apiKey)">
+           Set key
+         </button>
+
+       </ion-item>
+
+       <ion-item class="item item-divider">
+         FYI
+       </ion-item>
+
+       <div class="item item-text-wrap item-no-border">
+          <p class="type type-muted">
+            <i class="icon ion-ios-information"></i> Your data is handled with the care and respect which would be given any medical information. That said, I'm not a doctor! Please don't share information that you wouldn't be comfortable sharing publicly.
+          </p>
+          <hr>
+          <p class="type type-muted">
+            <i class="icon ion-android-phone-portrait"></i> This mobile application is designed to allow you to handle your own records. You won't find your Open Biome logs listed in the calendar view directly, but their presence will be visible in the calendar squares and quantified in the statistics.
+          </p>
+          <hr>
+          <p class="type type-muted">
+            <i class="icon ion-ios-help"></i>  Got questions, feedback? Please contact me at <strong>rotblauer@gmail.com</strong>.
+          </p>
+          <hr>
+          <p class="type type-muted">
+            &copy; Rotblauer, LLC 2016
+          </p>
+
+       </div>
+
+<!--       <ion-item class="item item-divider">
+        Some basic checks
+      </ion-item>
+      <ion-item class="item item-icon">
+        icons working?
+        <i class="icon ion-checkmark-circled"></i>
+      </ion-item>
+      <ion-item class="item item-thumbnail">
+        images working?<br>
+        <img width="75" src="main/assets/images/yo@2x.png">
+      </ion-item>
+      <ion-item class="item">{{someData.binding}}</ion-item>
+      <ion-item class="item item-divider">Environment variables:</ion-item>
+      <ion-item class="item item-text-wrap">
+        <pre>{{ENV | json}}</pre>
+      </ion-item>
+      <ion-item class="item item-divider">Build variables:</ion-item>
+      <ion-item class="item item-text-wrap">
+        <pre>{{BUILD | json}}</pre>
+      </ion-item>
+
+      <ion-item class="item item-divider">Password Test:</ion-item>
+      <ion-item class="item item-text-wrap">
+        <label class="item item-input">
+          <span class="input-label">Password</span>
+          <input type="password"
+            ng-model="password.input"
+            ng-change="grade()">
+        </label>
+      </ion-item>
+      <ion-item class="item item-text-wrap">
+        Strength
+        <span class="badge"
+          ng-class="{
+            'badge-assertive': password.strength === 'weak',
+            'badge-balanced': password.strength === 'strong',
+            'badge-energized': password.strength === 'medium'
+          }"
+          ng-bind="password.strength"></span>
+      </ion-item> -->
+
+    </ion-list>
+
+  </ion-content>
+</ion-view>

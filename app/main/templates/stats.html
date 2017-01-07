@@ -1,0 +1,336 @@
+<ion-view view-title="Stats" hide-nav-bar="true">
+
+  <ion-content class="padding recap" >
+
+    <div class="noticeable alert text-center" ng-if="notice">
+      <p class="{{noticeClass}}">{{ notice }}</p>
+    </div>
+
+    <style>
+      .tick line {display: none;}
+      /*.tick{display: none;}*/
+    </style>
+
+    <nvd3 options='dat.options' data='dat.data' api="api" ng-click="requestStats()"></nvd3>
+<!--     <button class="button button-block button-small button-balanced button-clear" ng-click="requestStats()">
+      requestStats()
+    </button>
+ -->
+
+    <div class="padding text-center">
+
+      <!-- counts -->
+      <div class="row" >
+        <div class="col">
+
+          <div class="infograph-text info-bordered" ng-class="{'selected' : statSelected === stats.today}" ng-click="selectStats(stats.today)">
+            <p class="type type-muted">Today</p>
+            <h3 class="type type-balanced type-shorty" >
+              {{ stats.today.count.processable }}<br><sup class="type type-assertive super-small">{{ stats.today.count.rejected }}</sup>
+            </h3>
+          </div>
+        </div >
+        <div class="col">
+
+          <!-- <nvd3 options='dat.sparkOptions' data='sparkData'></nvd3> -->
+
+          <div class="infograph-text info-bordered" ng-class="{'selected' : statSelected === stats.this_week}" ng-click="selectStats(stats.this_week)">
+            <p class="type type-muted">Week</p>
+            <h3 class="type type-balanced type-shorty" >
+              {{ stats.this_week.count.processable }}<br><sup class="type type-assertive super-small">{{ stats.this_week.count.rejected }}</sup>
+            </h3>
+          </div>
+        </div >
+        <div class="col">
+          <div class="infograph-text info-bordered" ng-class="{'selected' : statSelected === stats.this_month}" ng-click="selectStats(stats.this_month)">
+            <p class="type type-muted">1 Mo.</p>
+            <h3 class="type type-balanced type-shorty" >
+              {{ stats.this_month.count.processable }}<br><sup class="type type-assertive super-small">{{ stats.this_month.count.rejected }}</sup>
+            </h3>
+          </div>
+        </div>
+        <div class="col" >
+          <div class="infograph-text info-bordered" ng-class="{'selected' : statSelected === stats.last_two_months}" ng-click="selectStats(stats.last_two_months)">
+            <p class="type type-muted">2 Mo.</p>
+            <h3 class="type type-balanced type-shorty" >
+              {{ stats.last_two_months.count.processable }}<br><sup class="type type-assertive super-small">{{ stats.last_two_months.count.rejected }}</sup>
+            </h3>
+          </div>
+        </div>
+        <div class="col" >
+          <div class="infograph-text info-bordered" ng-class="{'selected' : statSelected === stats.overall}" ng-click="selectStats(stats.overall)">
+            <p class="type type-muted">∞</p>
+            <h3 class="type type-balanced type-shorty" >
+              {{ stats.overall.count.processable }}<br><sup class="type type-assertive super-small">{{ stats.overall.count.rejected }}</sup>
+            </h3>
+          </div>
+        </div>
+      </div>
+
+      <hr>
+
+
+      <div class="row">
+        <div class="col">
+          <div class="infograph-text">
+            <p class="type type-muted">
+              Poo donated
+            </p>
+            <h2 class="type type-balanced">
+              {{ statSelected.weight.sum / 453.592 | number:1 }}<small>lbs</small>
+            </h2>
+          </div>
+        </div>
+        <div class="col">
+          <div class="infograph-text">
+            <p class="type type-muted">
+              Gross income
+            </p>
+            <h2 class="type type-balanced">
+              ${{ statSelected.count.processable * 40 }}
+            </h2>
+          </div>
+        </div>
+      </div>
+
+      <!-- mmm -->
+      <div class="row">
+        <div class="col">
+          <div class="infograph-text">
+            <p class="type type-muted">Min</p>
+            <h4 class="type type-poo">{{ statSelected.weight.min | number:0 }}<sup>{{ statSelected.bristol.min | number:0 }}</sup> </h4>
+          </div>
+        </div>
+        <div class="col">
+          <div class="infograph-text">
+            <p class="type type-muted">Mean</p>
+            <h4 class="type type-poo">{{ statSelected.weight.mean | number:0 }}<sup>{{ statSelected.bristol.mean | number:0 }}</sup> </h4>
+          </div>
+        </div>
+        <div class="col">
+          <div class="infograph-text">
+            <p class="type type-muted">Median</p>
+            <h4 class="type type-poo">{{ statSelected.weight.median | number:0 }}<sup>{{ statSelected.bristol.median | number:0 }}</sup> </h4>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="infograph-text">
+            <p class="type type-muted">Mode</p>
+            <h4 class="type type-poo">{{ statSelected.weight.mode | number:0 }}<sup>{{ statSelected.bristol.mode | number:0 }}</sup> </h4>
+          </div>
+        </div>
+        <div class="col">
+          <div class="infograph-text">
+            <p class="type type-muted">Max</p>
+            <h4 class="type type-poo">{{ statSelected.weight.max | number:0 }}<sup>{{ statSelected.bristol.max | number:0 }}</sup> </h4>
+          </div>
+        </div>
+      </div>
+
+      <!-- Q's -->
+      <div class="row">
+        <div class="col">
+          <div class="infograph-text">
+            <p class="type type-muted">Q1</p>
+            <h4 class="type type-poo">{{ statSelected.weight.q1 }}<sup>{{ statSelected.bristol.q1 }}</sup> </h4>
+          </div>
+        </div>
+        <div class="col">
+          <div class="infograph-text">
+            <p class="type type-muted">Q2</p>
+            <h4 class="type type-poo">{{ statSelected.weight.q2 }}<sup>{{ statSelected.bristol.q2 }}</sup> </h4>
+          </div>
+        </div>
+        <div class="col">
+          <div class="infograph-text">
+            <p class="type type-muted">Q3</p>
+            <h4 class="type type-poo">{{ statSelected.weight.q3 }}<sup>{{ statSelected.bristol.q3 }}</sup> </h4>
+          </div>
+        </div>
+      </div>
+
+      <hr>
+
+      <!-- <p class="type type-muted" style="font-weight: lighter; margin-top: 20px;">
+        Poos / days / week
+      </p>
+      <div class="weekday-container row">
+          <div class="col" style="padding: 2px;">
+            <div class="infograph-text skinny" style="background-color: {{ wdayColors[1] }};">
+              <p class="small light" style="font-size: smaller;">MON</p>
+              <h4 class="light">{{dat.unixer.weekdayly[1]}}</h4>
+            </div>
+          </div>
+          <div class="col" style="padding: 2px;">
+            <div class="infograph-text skinny" style="background-color: {{ wdayColors[2] }};">
+              <p class="small light" style="font-size: smaller;">TUE</p>
+              <h4 class="light">{{dat.unixer.weekdayly[2]}}</h4>
+            </div>
+          </div>
+          <div class="col" style="padding: 2px;">
+            <div class="infograph-text skinny" style="background-color: {{ wdayColors[3] }};">
+              <p class="small light" style="font-size: smaller;">WED</p>
+              <h4 class="light">{{dat.unixer.weekdayly[3]}}</h4>
+            </div>
+          </div>
+          <div class="col" style="padding: 2px;">
+            <div class="infograph-text skinny" style="background-color: {{ wdayColors[4] }};">
+              <p class="small light" style="font-size: smaller;">THU</p>
+              <h4 class="light">{{dat.unixer.weekdayly[4]}}</h4>
+            </div>
+          </div>
+          <div class="col" style="padding: 2px;">
+            <div class="infograph-text skinny" style="background-color: {{ wdayColors[5] }};">
+              <p class="small light" style="font-size: smaller;">FRI</p>
+              <h4 class="light">{{dat.unixer.weekdayly[5]}}</h4>
+            </div>
+          </div>
+          <div class="col" style="padding: 2px;">
+            <div class="infograph-text skinny" style="background-color: {{ wdayColors[6] }};">
+              <p class="small light" style="font-size: smaller;">SAT</p>
+              <h4 class="light">{{dat.unixer.weekdayly[6]}}</h4>
+            </div>
+          </div>
+          <div class="col" style="padding: 2px;">
+            <div class="infograph-text skinny" style="background-color: {{ wdayColors[0] }};">
+              <p class="small light" style="font-size: smaller;">SUN</p>
+              <h4 class="light">{{dat.unixer.weekdayly[0]}}</h4>
+            </div>
+          </div>
+      </div>
+
+      <p class="type type-muted" style="font-weight: lighter; margin-top: 20px;">
+        Poos / hour
+      </p>
+      <div class="row" ng-repeat="hrs in hours">
+        <div class="col text-center" style="padding: 1px;" ng-repeat="hour in hrs">
+          <div class="hourly-info" style="background-color: {{ hourlyColors[hour] }}; {{colorSixHours(hour)}}"
+            >
+            <span style="font-size: .6em;" class="light" >{{ hour }}:{{ dat.unixer['hourly'][hour]}}</span>
+          </div>
+        </div>
+      </div> -->
+
+  <!--     <div class="col" style="padding: 2px;">
+        <div class="infograph-text skinny" style="background-color: {{ wdayColors[1] }};">
+          <p class="small light" style="font-size: smaller;">MON</p>
+          <h4 class="light">{{dat.unixer.weekdayly[1]}}</h4>
+        </div>
+      </div>
+
+      <p>
+        {{ dat.dh | json }}
+      </p>
+
+      <p class='assertive' ng-repeat="(key, value) in dat.dh">
+        {{ key | json }}
+        <strong class="balanced" ng-repeat="(key, value) in value">
+          {{ key | json }} : {{ value | json }}
+        </strong>
+      </p> -->
+
+      <div class="row" style="margin-left: -17px;">
+        <div class="col col-1 hourName" style="padding: 0px;"></div>
+        <div class="col infograph-text skinny">
+          <p>MON</p>
+        </div>
+        <div class="col infograph-text skinny">
+          <p>TUE</p>
+        </div>
+        <div class="col infograph-text skinny">
+          <p>WED</p>
+        </div>
+        <div class="col infograph-text skinny">
+          <p>THU</p>
+        </div>
+        <div class="col infograph-text skinny">
+          <p>FRI</p>
+        </div>
+        <div class="col infograph-text skinny">
+          <p>SAT</p>
+        </div>
+        <div class="col infograph-text skinny">
+          <p>SUN</p>
+        </div>
+      </div>
+
+      <div class="row weekday-container" ng-repeat="(key, value) in dat.dh" style="margin-left: -17px;">
+        <div class="col col-1" style="padding: 0px;">
+          <sup style="font-size: .5em; font-weight: lighter;">{{key}}</sup>
+        </div>
+          <div class="col infograph-text skinny" style="margin: 1px; background-color: {{ setColor(allVals, dat.dh[key][1]) }};">
+            <p class="small light" style="font-weight: lighter;">{{dat.dh[key][1]}}</p>
+          </div>
+          <div class="col infograph-text skinny" style="margin: 1px; background-color: {{ setColor(allVals, dat.dh[key][2]) }};">
+            <p class="small light" style="font-weight: lighter;">{{dat.dh[key][2]}}</p>
+          </div>
+          <div class="col infograph-text skinny" style="margin: 1px; background-color: {{ setColor(allVals, dat.dh[key][3]) }};">
+            <p class="small light" style="font-weight: lighter;">{{dat.dh[key][3]}}</p>
+          </div>
+          <div class="col infograph-text skinny" style="margin: 1px; background-color: {{ setColor(allVals, dat.dh[key][4]) }};">
+            <p class="small light" style="font-weight: lighter;">{{dat.dh[key][4]}}</p>
+          </div>
+          <div class="col infograph-text skinny" style="margin: 1px; background-color: {{ setColor(allVals, dat.dh[key][5]) }};">
+            <p class="small light" style="font-weight: lighter;">{{dat.dh[key][5]}}</p>
+          </div>
+          <div class="col infograph-text skinny" style="margin: 1px; background-color: {{ setColor(allVals, dat.dh[key][6]) }};">
+            <p class="small light" style="font-weight: lighter;">{{dat.dh[key][6]}}</p>
+          </div>
+          <div class="col infograph-text skinny" style="margin: 1px; background-color: {{ setColor(allVals, dat.dh[key][0]) }};">
+            <p class="small light" style="font-weight: lighter;">{{dat.dh[key][0]}}</p>
+          </div>
+      </div>
+
+    </div>
+
+
+
+
+   <!--  <div class="row">
+      <div class="col-50">
+        <p class="text-muted">Overall</p>
+      </div>
+      <div class="col-50">
+        <p class="text-muted">Last 2 months</p>
+      </div>
+    </div>
+    <div class="row text-center">
+      <div class="col-50">
+        <h2 class="balanced">
+          <sup class="positive">{{ stats.overall.count.processable }}</sup>
+          ${{ stats.overall.count.processable * 40 }}
+          <sup class="assertive">{{ stats.overall.count.rejected }}</sup>
+        </h2>
+      </div>
+      <div class="col-50">
+        <h2 class="balanced">
+          <sup class="positive">{{ stats.last_two_months.count.processable }}</sup>
+          ${{ stats.last_two_months.count.processable * 40 }}
+          <sup class="assertive">{{ stats.last_two_months.count.rejected }}</sup>
+        </h2>
+      </div>
+    </div>
+
+    <h4>weight</h4>
+    <div class="row">
+      <div class="col-50">
+        <p ng-repeat="(key, val) in stats.overall.weight"><strong>{{ key }}:</strong>&nbsp;{{ val | number:0 }}</p>
+      </div>
+      <div class="col-50">
+        <p ng-repeat="(key, val) in stats.last_two_months.weight"><strong>{{ key }}:</strong>&nbsp;{{ val | number:0 }}</p>
+      </div>
+    </div>
+
+    <h4>bristol</h4>
+    <div class="row">
+      <div class="col-50">
+        <p ng-repeat="(key, val) in stats.overall.bristol"><strong>{{ key }}:</strong>&nbsp;{{ val | number:0 }}</p>
+      </div>
+      <div class="col-50">
+        <p ng-repeat="(key, val) in stats.last_two_months.bristol"><strong>{{ key }}:</strong>&nbsp;{{ val | number:0 }}</p>
+      </div>
+    </div> -->
+
+  </ion-content>
+</ion-view>

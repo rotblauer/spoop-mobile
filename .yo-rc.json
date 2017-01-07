@@ -1,0 +1,24 @@
+{
+  "generator-m-ionic": {
+    "answers": {
+      "appName": "Spoop",
+      "appId": "com.rotblauer.poopfactory",
+      "ionicCss": false,
+      "bowerPackages": [
+        "angular-dynamic-locale#~0.1.27",
+        "angular-translate#~2.8.1",
+        "angular-translate-loader-static-files#~2.8.1",
+        "angular-localForage#~1.2.3"
+      ],
+      "platforms": [
+        "ios"
+      ],
+      "plugins": [
+        "cordova-plugin-device",
+        "cordova-plugin-inappbrowser",
+        "com.ionic.keyboard"
+      ],
+      "appModule": "PoopFactory"
+    }
+  }
+}

@@ -1,0 +1,75 @@
+<ion-view view-title="Add a poop" hide-nav-bar="true">
+
+  <ion-content class="padding" >
+
+    <div class="noticeable alert text-center">
+      <p class="{{noticeClass}}">{{ notice }}</p>
+    </div>
+
+    <ion-list>
+
+      <div class="row">
+        <div class="col">
+          <div class="poop-gui-container">
+          <div class='poop-gui type type-mocha{{newPoop.bristol_score}}'
+                style="height: {{ (newPoop.weight / 100) * 70 }}px; border-radius: {{ (newPoop.weight / 100) * 35 }}px; width: {{ (newPoop.weight / 100) * 70 }}px; margin-bottom: 10px; margin-top: -5px;"></div>
+
+          </div>
+        </div>
+        <div class="col">
+          <div class="poop-gui-container">
+            <h1 class="poop-gui type type-poo">
+              {{newPoop.weight}}g<sup>{{newPoop.bristol_score}}</sup>
+            </h1>
+          </div>
+        </div>
+      </div>
+
+      <div class="item type type-poo item-no-border range">
+        BRISTOL
+        <input class="type type-poo" type="range" name="volume" ng-model="newPoop.bristol_score" min="1" max="7">
+      </div>
+
+      <div class="item type type-poo item-no-border range">
+        <span ng-click="showPopup()">WEIGHT</span>
+        <input class="type type-poo" type="range" name="volume" ng-model="newPoop.weight" min="40" max="180">
+      </div>
+
+      <div class="item item-no-border "  >
+
+        <h2 ion-datetime-picker class="text-center type type-positive" ng-model="newPoop.time_of_passage">
+        {{ newPoop.time_of_passage| date: "EEEE, d MMMM @ HH:mm"  }}
+        </h2>
+        <!-- <i  class="button button button-clear button-positive icon ion-ios-reload" ng-click="updateTime()"></i> -->
+      </div>
+
+      <div class="row">
+        <div class="col-50">
+          <ion-checkbox  class="item-no-border" ng-model="newPoop.donated">donated</ion-checkbox>
+        </div>
+        <div class="col-50">
+          <ion-checkbox  class="item-no-border" ng-model="newPoop.processable">processed</ion-checkbox>
+        </div>
+      </div>
+
+      <!-- <div class="padding">
+        <small class="type type-muted">Use <span class="type type-positive">#hashtags</span> to track <span class="type type-positive">#what you ate</span>, what you've <span class="type type-positive">#been doing</span>, and <span class="type type-positive">#where</span> you've been!</small>
+      </div> -->
+
+      <div class="item  item-no-border item-input">
+
+        <style>
+          .thing {
+            color: red;
+          }
+        </style>
+
+        <textarea highlight="format"
+  highlight-onchange="listMarkers($markers)" type="text" placeholder="{{notesPlaceholder}}" col="3" ng-model="newPoop.notes"></textarea>
+      </div>
+    </ion-list>
+
+    <button class="button icon ion-plus button-block button-balanced" ng-click="addPoop()">
+    </button>
+
+</ion-view>

@@ -1,0 +1,94 @@
+
+<ion-view > <!-- hide-nav-bar='true' -->
+
+  <ion-nav-title>
+    {{ data.poop.time_of_passage | date: 'EEEE, d MMMM @ HH:mm' }}
+  </ion-nav-title>
+
+  <ion-nav-buttons side="right">
+        <button class="button button-assertive button-clear" ng-click="delete()">
+          delete
+        </button>
+      </ion-nav-buttons>
+
+  <ion-content class="padding">
+
+    <!-- <div class="" style="float:right;">
+    <button class="button button-small button-assertive button-clear" ng-click="delete()">
+     delete
+    </button>
+    </div> -->
+
+    <p class="notice balanced">
+      {{ notice.success }}
+    </p>
+    <p class="notice assertive">
+      {{ notice.error }}
+    </p>
+
+    <ion-list>
+
+   <div class="row">
+       <div class="col">
+         <div class="poop-gui-container">
+         <div class='poop-gui type type-mocha{{data.poop.bristol_score}}'
+               style="height: {{ (data.poop.weight / 100) * 70 }}px; border-radius: {{ (data.poop.weight / 100) * 35 }}px; width: {{ (data.poop.weight / 100) * 70 }}px; margin-bottom: 10px; margin-top: -5px;"></div>
+
+         </div>
+       </div>
+       <div class="col">
+         <div class="poop-gui-container">
+           <h1 class="poop-gui type type-poo">
+             {{data.poop.weight}}g<sup>{{data.poop.bristol_score}}</sup>
+           </h1>
+         </div>
+       </div>
+     </div>
+
+
+
+     <div class="item type type-poo item-no-border range">
+       BRISTOL
+       <input class="type type-poo" type="range" name="volume" ng-model="data.poop.bristol_score" min="1" max="7">
+     </div>
+
+     <div class="item type type-poo item-no-border range">
+       <span ng-click="showPopup()">WEIGHT</span>
+       <input class="type type-poo" type="range" name="volume" ng-model="data.poop.weight" min="40" max="180">
+     </div>
+
+     <div class="item  item-no-border "  >
+
+       <h2 ion-datetime-picker class="text-center type type-positive" ng-model="data.poop.time_of_passage">
+       {{ data.poop.time_of_passage| date: "EEEE, d MMMM @ HH:mm"  }}
+       </h2>
+       <!-- <i  class="button button button-clear button-positive icon ion-ios-reload" ng-click="updateTime()"></i> -->
+     </div>
+
+     <div class="row">
+       <div class="col-50">
+         <ion-checkbox  class="item-no-border" ng-model="data.poop.donated">donated</ion-checkbox>
+       </div>
+       <div class="col-50">
+         <ion-checkbox  class="item-no-border" ng-model="data.poop.processable">processed</ion-checkbox>
+       </div>
+     </div>
+
+     <label class="item  item-no-border item-input">
+       <textarea id='list-detail' highlight="format"
+  highlight-onchange="listMarkers($markers)" type="text" placeholder="{{notesPlaceholder}}" col="3" ng-model="data.poop.notes"></textarea>
+     </label>
+    </ion-list>
+
+    <button class="button button-block button-balanced" ng-class="{'button-outline': !dirtyPoop}"  ng-click="update()">
+      Update
+    </button>
+
+    <p>
+      {{ dirtyPoop | json }}
+    </p>
+
+
+
+  </ion-content>
+</ion-view>
